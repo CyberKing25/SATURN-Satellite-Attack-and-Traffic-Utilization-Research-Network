@@ -1,47 +1,71 @@
 package satelliteAttackSim.simulations;
 
-import inet.node.inet.StandartHost;
+import inet.node.inet.StandardHost;
 import inet.node.inet.Router;
-import inet.mobility.single.ConstSpeedMobility;
-import inet.physicallayer.common.packetlevel.RadioMedium;
+import inet.mobility.single.LinearMobility;
+import inet.physicallayer.contract.packetlevel.IRadioMedium
 
 
-network SatelliteNetwork {
+module SatelliteNode {
 
-	parameters:
-		int numSatellites = default(2);
-		int numGroundStations = default(1);
-		
+	gates:
+	    input receiver;
+	    output transmitter;
+}
+
+module GroundStation {
+
+	gates:
+	    input receiver;
+	    output transmitter;
+}
+
+network SatelliteCommunicationNetwork {
+    
+    types:
+        channel RadioLink  RadioMedium {
+        
+        } 
+
 	submodules:
-		radioMedium: RadioMedium {
+
+		satellite1: SatelliteNode {
+			@display("i=device/satellite");
+		}
+
+		satellite2: SatelliteNode {
+			@display("i=device/satellite");
+		}
+
+		groundStation1: GroundStation;
+
+		groundStation2: GroundStation;
+
+	connections:
+
+		satellite1.transmitter --> RadioLink --> groundStation1.receiver;
 		
-			@display("p=100,100");
-			
-		}
-	
-		groundStation[numGroundStations]: StandardHost {
-
-			@display(“p=200,300+100*i”);
-
-		}
-
-		satellite[numSatellites]: StandardHost {
-
-			@display(“p=400,100+100*i”);
-
-			mobility.typename = “ConstSpeedMobility”;
-
-		}
-
-	connections allowunconnected:
-
-		for i=0..numGroundStations-1 {
-			groundStation[i].wlan[0] <--> radioMedium <--> satellite[0].wlan[0];
-		}
+		satellite1.transmitter --> RadioLink --> groundStation2.receiver;
 		
-		for i=0..numSatellites-1 {
-			satellite[i].wlan[0] <--> radioMedium <--> satellite[(i+1) % numSatellites].wlan[0];
-		}
+		satellite1.transmitter --> RadioLink --> satellite2.receiver;
+		
+		satellite1.receiver <-- RadioLink <-- satellite2.transmitter;
+		
+		satellite1.receiver <-- RadioLink <-- groundStation1.transmitter;
+		
+		satellite1.receiver <-- RadioLink <-- groundStation2.transmitter;
+
+		satellite2.transmitter --> RadioLink --> groundStation1.receiver;
+		
+		satellite2.transmitter --> RadioLink --> groundStation2.receiver;
+		
+		satellite2.transmitter --> RadioLink --> satellite2.receiver;
+		
+		satellite2.receiver <-- RadioLink <-- satellite2.transmitter;
+		
+		satellite2.receiver <-- RadioLink <-- groundStation1.transmitter;
+		
+		satellite2.receiver <-- RadioLink <-- groundStation2.transmitter;
 
 }
 
