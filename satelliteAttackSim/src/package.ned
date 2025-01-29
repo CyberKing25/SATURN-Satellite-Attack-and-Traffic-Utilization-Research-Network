@@ -1,3 +1,0 @@
-package satelliteattacksim;
-
-@license(LGPL);
