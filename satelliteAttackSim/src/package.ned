@@ -1,3 +1,3 @@
-package satelliteAttackSim.src;
+package satelliteattacksim;
 
 @license(LGPL);
