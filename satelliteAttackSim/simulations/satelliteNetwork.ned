@@ -15,21 +15,29 @@
 
 package satelliteattacksim.simulations;
 import satelliteattacksim.Satellite;
+import satelliteattacksim.GroundStation;
+import inet.physicallayer.wireless.common.medium.RadioMedium;
 
 network SatelliteNetwork
 {
     @display("bgb=185,211");
     submodules:
+        radioMedium: RadioMedium {
+            @display("p=100,100");
+        }
         satellite1: Satellite {
             @display("p=31,30");
         }
         satellite2: Satellite {
             @display("p=149,30");
         }
-    connections:
+        groundStation: GroundStation {
+            @display("p=31,143");
+        }
+       
+
+    connections allowunconnected:
         satellite1.pppg++ <--> PointToPointLink <--> satellite2.pppg++;
-
-
 }
 
 
