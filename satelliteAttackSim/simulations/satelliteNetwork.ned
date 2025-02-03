@@ -17,32 +17,39 @@ package satelliteattacksim.simulations;
 import satelliteattacksim.Satellite;
 import satelliteattacksim.GroundStation;
 import inet.physicallayer.wireless.common.medium.RadioMedium;
-
-network SatelliteNetwork
-{
+import inet.node.inet.WirelessHost;
+import inet.mobility.static.StaticLinearMobility;
+import inet.mobility.single.CircleMobility;
+network SatelliteNetwork {
+    
     @display("bgb=185,211");
+        
     submodules:
         radioMedium: RadioMedium {
             @display("p=100,100");
         }
         satellite1: Satellite {
-            @display("p=31,30");
+            @display("p=31,30;is=satellite");
+            mobility.typename = "CircleMobility";  // Satellites move in orbit
+            mobility.speed = uniform(7500 mps, 7800 mps); // Speed varies slightly
+            //mobility.angle = uniform(0, 360); // Different orbits
         }
         satellite2: Satellite {
-            @display("p=149,30");
+            @display("p=149,30;is=satellite");
+            mobility.typename = "CircleMobility";  // Satellites move in orbit
         }
         groundStation: GroundStation {
-            @display("p=31,143");
+            @display("p=31,143;is=groundstation");
         }
        
 
     connections allowunconnected:
-        satellite1.pppg++ <--> PointToPointLink <--> satellite2.pppg++;
+        //satellite1.pppg++ <--> PointToPointLink <--> satellite2.pppg++;
+            
 }
 
 
-channel PointToPointLink extends ned.DatarateChannel
-{
+channel PointToPointLink extends ned.DatarateChannel {
     delay = 300ms; // Simulate satellite link delay
     datarate = 10Mbps; // Bandwidth
     ber = 1e-6; // Bit error rate

@@ -14,13 +14,18 @@
 // 
 
 package satelliteattacksim;
-import inet.node.inet.StandardHost;
+import inet.node.inet.WirelessHost;
+import inet.mobility.single.CircleMobility;
 
 //
 // TODO auto-generated module
 //
-module Satellite extends StandardHost
-{
+module Satellite extends WirelessHost {
     parameters:
-        @display("i=device/satellite;");
+    	string nodeType = default("Satellite");
+        double frequency @unit("GHz") = default(1 GHz); // RF Frequency
+        double transmitPower @unit("mW") = default(10 mW);
+        //double mobilitySpeed @unit("m/s") = default(7500 m/s); // Approximate LEO speed
+        @display("i=device/satellite;bgb=1793,1215");
+        
 }

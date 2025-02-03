@@ -14,23 +14,24 @@
 // 
 
 package satelliteattacksim;
-import inet.node.inet.StandardHost;
+import inet.node.inet.WirelessHost;
 import inet.physicallayer.wireless.common.antenna.IsotropicAntenna;
 //
 // TODO auto-generated module
 //
-module GroundStation extends StandardHost
+module GroundStation extends WirelessHost
 {
     parameters:
-        @display("i=device/router;");
+        @display("i=device/router;bgb=1255,1244");
         wlan[0].typename = "WirelessInterface";
         wlan[0].radio.typename = "Radio";
         wlan[0].radio.transmitter.typename = "GenericTransmitter";
         wlan[0].radio.receiver.typename = "GenericReceiver";
         wlan[0].radio.antenna.typename = "DirectionalAntenna";  // Use Directional Antenna
-
-//    submodules:
-//        antenna: IsotropicAntenna {
-//        }
+		
+		string nodeType = default("GroundStation");
+        double frequency @unit("GHz") = default(2.4 GHz); // S-band for Earth communication
+        double transmitPower @unit("mW") = default(50 mW); // More powerful than satellites
+        bool isTrackingSatellite = default(true);
 }
 

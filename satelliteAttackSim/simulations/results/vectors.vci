@@ -1,4 +1,4 @@
-file 22051 1738151627                                           
+file 22051 1738226184                                           
 version 3
 run General-0-20250129-12:53:28-18352
 attr configname General
@@ -39,26 +39,6 @@ config **.recordVectors true
 config **.tcp.recordStats true
 config **.tcp.verbose true
 
-vector 0 SatelliteNetwork.satellite1.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 1 SatelliteNetwork.satellite1.lo[0].lo passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 2 SatelliteNetwork.satellite1.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 3 SatelliteNetwork.satellite1.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
 vector 4 SatelliteNetwork.satellite1.ppp[0].queue queueLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
@@ -66,6 +46,7 @@ attr recordingmode vector
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length"
 attr unit pk
+4	21769 45 0 0 0 0 5 0 0 0 0
 vector 5 SatelliteNetwork.satellite1.ppp[0].queue queueBitLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
@@ -73,210 +54,38 @@ attr recordingmode vector
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length"
 attr unit b
-vector 6 SatelliteNetwork.satellite1.ppp[0].queue queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetPulled)
-attr title "queueing times"
-attr unit s
-vector 7 SatelliteNetwork.satellite1.ppp[0].queue incomingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPushStarted)
-attr title "incoming packet lengths"
-attr unit b
-vector 8 SatelliteNetwork.satellite1.ppp[0].queue incomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPushStarted)
-attr title "incoming datarate"
-attr unit bps
-vector 9 SatelliteNetwork.satellite1.ppp[0].queue outgoingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPulled)
-attr title "outgoing packet lengths"
-attr unit b
-vector 10 SatelliteNetwork.satellite1.ppp[0].queue outgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPulled)
-attr title "outgoing datarate"
-attr unit bps
-vector 11 SatelliteNetwork.satellite1.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
-attr title "dropped packet lengths: queue overflow"
-attr unit b
-vector 12 SatelliteNetwork.satellite1.ppp[0].queue flowQueueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(demuxFlow(packetPulled))
-attr title "flow queueing times"
-attr unit s
-vector 13 SatelliteNetwork.satellite1.ppp[0].queue flowIncomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
-attr title "flow specific incoming data rate"
-attr unit bps
-vector 14 SatelliteNetwork.satellite1.ppp[0].queue flowOutgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
-attr title "flow specific outgoing data rate"
-attr unit bps
+5	21814 45 0 0 0 0 5 0 0 0 0
 vector 15 SatelliteNetwork.satellite1.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source transmissionStateChanged
 attr title "tx state"
-vector 16 SatelliteNetwork.satellite1.ppp[0].ppp txPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToLower
-attr title "packets transmitted, packetBytes"
-vector 17 SatelliteNetwork.satellite1.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source rxPkOk
-attr title "packets received OK, packetBytes"
-vector 18 SatelliteNetwork.satellite1.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packet drop: incorrectly received, packetBytes"
-vector 19 SatelliteNetwork.satellite1.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drop: interface down, packetBytes"
-vector 20 SatelliteNetwork.satellite1.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 21 SatelliteNetwork.satellite1.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 22 SatelliteNetwork.satellite1.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 23 SatelliteNetwork.satellite1.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 24 SatelliteNetwork.satellite1.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
-attr title "packet drop: address resolution failed, packetBytes"
-vector 25 SatelliteNetwork.satellite1.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsHopLimitReached(packetDropped)
-attr title "packet drop: hop limit reached, packetBytes"
-vector 26 SatelliteNetwork.satellite1.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsForwardingDisabled(packetDropped)
-attr title "packet drop: forwarding disabled, packetBytes"
-vector 27 SatelliteNetwork.satellite1.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoInterfaceFound(packetDropped)
-attr title "packet drop: no interface found, packetBytes"
-vector 28 SatelliteNetwork.satellite1.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoRouteFound(packetDropped)
-attr title "packet drop: no route found, packetBytes"
-vector 29 SatelliteNetwork.satellite1.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsUndefined(packetDropped)
-attr title "packet drop: undefined, packetBytes"
-vector 30 SatelliteNetwork.satellite1.ipv4.arp arpRequestSent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpRequestSent
-attr title "ARP request sent, packetBytes"
-vector 31 SatelliteNetwork.satellite1.ipv4.arp arpReplySent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpReplySent
-attr title "ARP replies sent, packetBytes"
-vector 32 SatelliteNetwork.satellite1.udp packetSent:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSent
-attr title "packets sent, packetBytes"
-vector 33 SatelliteNetwork.satellite1.udp packetReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
+15	21859 10 0 0 0 0 1 0 0 0 0
 vector 34 SatelliteNetwork.satellite1.udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetSentToUpper
 attr title "packets passed up, count"
+34	21869 10 0 0 0 0 1 0 0 0 0
 vector 35 SatelliteNetwork.satellite1.udp droppedPkWrongPort:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetDropReasonIsNoPortFound(packetDropped)
 attr title "packets dropped (wrong port), count"
+35	21879 10 0 0 0 0 1 0 0 0 0
 vector 36 SatelliteNetwork.satellite1.udp droppedPkBadChecksum:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packets dropped (checksum error), count"
-vector 37 SatelliteNetwork.satellite1.app[0] packetReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
-vector 38 SatelliteNetwork.satellite1.app[0] packetSent:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSent
-attr title "packets sent, packetBytes"
-vector 39 SatelliteNetwork.satellite1.app[0] endToEndDelay:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source dataAge(packetReceived)
-attr title "end-to-end delay"
-attr unit s
+36	21889 10 0 0 0 0 1 0 0 0 0
 vector 40 SatelliteNetwork.satellite1.app[0] numActiveSessions:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source warmup(sum(connect))
 attr title "number of active sessions"
-vector 41 SatelliteNetwork.satellite2.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 42 SatelliteNetwork.satellite2.lo[0].lo passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 43 SatelliteNetwork.satellite2.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 44 SatelliteNetwork.satellite2.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
+40	21899 10 0 0 0 0 1 0 0 0 0
 vector 45 SatelliteNetwork.satellite2.ppp[0].queue queueLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
@@ -284,6 +93,7 @@ attr recordingmode vector
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length"
 attr unit pk
+45	21909 50 0 0 0 0 5 0 0 0 0
 vector 46 SatelliteNetwork.satellite2.ppp[0].queue queueBitLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
@@ -291,192 +101,28 @@ attr recordingmode vector
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length"
 attr unit b
-vector 47 SatelliteNetwork.satellite2.ppp[0].queue queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetPulled)
-attr title "queueing times"
-attr unit s
-vector 48 SatelliteNetwork.satellite2.ppp[0].queue incomingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPushStarted)
-attr title "incoming packet lengths"
-attr unit b
-vector 49 SatelliteNetwork.satellite2.ppp[0].queue incomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPushStarted)
-attr title "incoming datarate"
-attr unit bps
-vector 50 SatelliteNetwork.satellite2.ppp[0].queue outgoingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPulled)
-attr title "outgoing packet lengths"
-attr unit b
-vector 51 SatelliteNetwork.satellite2.ppp[0].queue outgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPulled)
-attr title "outgoing datarate"
-attr unit bps
-vector 52 SatelliteNetwork.satellite2.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
-attr title "dropped packet lengths: queue overflow"
-attr unit b
-vector 53 SatelliteNetwork.satellite2.ppp[0].queue flowQueueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(demuxFlow(packetPulled))
-attr title "flow queueing times"
-attr unit s
-vector 54 SatelliteNetwork.satellite2.ppp[0].queue flowIncomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
-attr title "flow specific incoming data rate"
-attr unit bps
-vector 55 SatelliteNetwork.satellite2.ppp[0].queue flowOutgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
-attr title "flow specific outgoing data rate"
-attr unit bps
+46	21959 50 0 0 0 0 5 0 0 0 0
 vector 56 SatelliteNetwork.satellite2.ppp[0].ppp transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source transmissionStateChanged
 attr title "tx state"
-vector 57 SatelliteNetwork.satellite2.ppp[0].ppp txPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToLower
-attr title "packets transmitted, packetBytes"
-vector 58 SatelliteNetwork.satellite2.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source rxPkOk
-attr title "packets received OK, packetBytes"
-vector 59 SatelliteNetwork.satellite2.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packet drop: incorrectly received, packetBytes"
-vector 60 SatelliteNetwork.satellite2.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drop: interface down, packetBytes"
-vector 61 SatelliteNetwork.satellite2.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 62 SatelliteNetwork.satellite2.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 63 SatelliteNetwork.satellite2.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 64 SatelliteNetwork.satellite2.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 65 SatelliteNetwork.satellite2.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
-attr title "packet drop: address resolution failed, packetBytes"
-vector 66 SatelliteNetwork.satellite2.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsHopLimitReached(packetDropped)
-attr title "packet drop: hop limit reached, packetBytes"
-vector 67 SatelliteNetwork.satellite2.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsForwardingDisabled(packetDropped)
-attr title "packet drop: forwarding disabled, packetBytes"
-vector 68 SatelliteNetwork.satellite2.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoInterfaceFound(packetDropped)
-attr title "packet drop: no interface found, packetBytes"
-vector 69 SatelliteNetwork.satellite2.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoRouteFound(packetDropped)
-attr title "packet drop: no route found, packetBytes"
-vector 70 SatelliteNetwork.satellite2.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsUndefined(packetDropped)
-attr title "packet drop: undefined, packetBytes"
-vector 71 SatelliteNetwork.satellite2.ipv4.arp arpRequestSent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpRequestSent
-attr title "ARP request sent, packetBytes"
-vector 72 SatelliteNetwork.satellite2.ipv4.arp arpReplySent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpReplySent
-attr title "ARP replies sent, packetBytes"
-vector 73 SatelliteNetwork.satellite2.udp packetSent:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSent
-attr title "packets sent, packetBytes"
-vector 74 SatelliteNetwork.satellite2.udp packetReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
+56	22009 10 0 0 0 0 1 0 0 0 0
 vector 75 SatelliteNetwork.satellite2.udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetSentToUpper
 attr title "packets passed up, count"
+75	22019 10 0 0 0 0 1 0 0 0 0
 vector 76 SatelliteNetwork.satellite2.udp droppedPkWrongPort:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetDropReasonIsNoPortFound(packetDropped)
 attr title "packets dropped (wrong port), count"
+76	22029 10 0 0 0 0 1 0 0 0 0
 vector 77 SatelliteNetwork.satellite2.udp droppedPkBadChecksum:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packets dropped (checksum error), count"
-vector 78 SatelliteNetwork.satellite2.app[0] packetReceived:vector(packetBytes) ETV
-attr checkSignals false
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
-vector 79 SatelliteNetwork.satellite2.app[0] endToEndDelay:vector ETV
-attr checkSignals false
-attr interpolationmode none
-attr recordingmode vector
-attr source dataAge(packetReceived)
-attr title "end-to-end delay"
-attr unit s
-4	21769 45 0 0 0 0 5 0 0 0 0
-5	21814 45 0 0 0 0 5 0 0 0 0
-15	21859 10 0 0 0 0 1 0 0 0 0
-34	21869 10 0 0 0 0 1 0 0 0 0
-35	21879 10 0 0 0 0 1 0 0 0 0
-36	21889 10 0 0 0 0 1 0 0 0 0
-40	21899 10 0 0 0 0 1 0 0 0 0
-45	21909 50 0 0 0 0 5 0 0 0 0
-46	21959 50 0 0 0 0 5 0 0 0 0
-56	22009 10 0 0 0 0 1 0 0 0 0
-75	22019 10 0 0 0 0 1 0 0 0 0
-76	22029 10 0 0 0 0 1 0 0 0 0
-77	22039 10 0 0 0 0 1 0 0 0 0
-
+77	22039 12 0 0 0 0 1 0 0 0 0
