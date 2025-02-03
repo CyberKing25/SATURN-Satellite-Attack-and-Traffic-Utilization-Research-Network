@@ -31,12 +31,13 @@ network SatelliteNetwork {
         satellite1: Satellite {
             @display("p=31,30;is=satellite");
             mobility.typename = "CircleMobility";  // Satellites move in orbit
-            mobility.speed = uniform(7500 mps, 7800 mps); // Speed varies slightly
+            mobility.speed = uniform(7500 kmps, 7800 kmps); // Speed varies slightly
             //mobility.angle = uniform(0, 360); // Different orbits
         }
         satellite2: Satellite {
-            @display("p=149,30;is=satellite");
+            @display("p=149,100;is=satellite");
             mobility.typename = "CircleMobility";  // Satellites move in orbit
+            mobility.speed = uniform(7500 kmps, 7800 kmps); // Speed varies slightly
         }
         groundStation: GroundStation {
             @display("p=31,143;is=groundstation");

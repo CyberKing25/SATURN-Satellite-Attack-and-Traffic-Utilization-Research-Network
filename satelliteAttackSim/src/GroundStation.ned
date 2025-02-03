@@ -22,7 +22,7 @@ import inet.physicallayer.wireless.common.antenna.IsotropicAntenna;
 module GroundStation extends WirelessHost
 {
     parameters:
-        @display("i=device/router;bgb=1255,1244");
+        @display("i=device/receiverdish;");
         //wlan[0].typename = "WirelessInterface";
         //wlan[0].radio.typename = "Radio";
         //wlan[0].radio.transmitter.typename = "GenericTransmitter";

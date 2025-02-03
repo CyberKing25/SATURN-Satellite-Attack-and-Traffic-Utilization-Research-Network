@@ -22,10 +22,13 @@ import inet.mobility.single.CircleMobility;
 //
 module Satellite extends WirelessHost {
     parameters:
+        @display("i=device/satellite;");
     	string nodeType = default("Satellite");
+    	string orbitNormal = default(""); 
+    	double altitude @unit("km") = default(2000km);
         double frequency @unit("GHz") = default(1 GHz); // RF Frequency
         double transmitPower @unit("mW") = default(10 mW);
+        double startingPhase @unit("deg") = default(0deg);
         //double mobilitySpeed @unit("m/s") = default(7500 m/s); // Approximate LEO speed
-        @display("i=device/satellite;bgb=1793,1215");
         
 }
