@@ -23,11 +23,11 @@ module GroundStation extends WirelessHost
 {
     parameters:
         @display("i=device/router;bgb=1255,1244");
-        wlan[0].typename = "WirelessInterface";
-        wlan[0].radio.typename = "Radio";
-        wlan[0].radio.transmitter.typename = "GenericTransmitter";
-        wlan[0].radio.receiver.typename = "GenericReceiver";
-        wlan[0].radio.antenna.typename = "DirectionalAntenna";  // Use Directional Antenna
+        //wlan[0].typename = "WirelessInterface";
+        //wlan[0].radio.typename = "Radio";
+        //wlan[0].radio.transmitter.typename = "GenericTransmitter";
+        //wlan[0].radio.receiver.typename = "GenericReceiver";
+        //wlan[0].radio.antenna.typename = "DirectionalAntenna";  // Use Directional Antenna
 		
 		string nodeType = default("GroundStation");
         double frequency @unit("GHz") = default(2.4 GHz); // S-band for Earth communication
