@@ -15,43 +15,32 @@
 
 package satelliteattacksim.simulations;
 import satelliteattacksim.Satellite;
+import satelliteattacksim.Attacker;
 import satelliteattacksim.GroundStation;
 import inet.physicallayer.wireless.common.medium.RadioMedium;
 import inet.node.inet.WirelessHost;
 import inet.mobility.static.StaticLinearMobility;
 import inet.mobility.single.CircleMobility;
-network SatelliteNetwork {
-    
-    @display("bgb=185,211");
-        
+import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
+import inet.physicallayer.wireless.common.medium.RadioMedium;
+import inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadioMedium;
+import inet.physicallayer.wireless.ieee80211.packetlevel.Ieee80211ScalarRadioMedium;
+import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
+
+network SatelliteNetwork
+{
+    parameters:
+        int numAttackers;
+        int numSats;
+        @figure[rcvdPkText](type=indicatorText; pos=380,20; anchor=w; font=,18; textFormat="packets received: %g"; initialValue=0);
+        @statistic[packetReceived](source=groundStation.app[0].packetReceived; record=figure(count); targetFigure=rcvdPkText);
     submodules:
-        radioMedium: RadioMedium {
-            @display("p=100,100");
+        visualizer: IntegratedCanvasVisualizer {
+            @display("p=580,125");
         }
-        satellite1: Satellite {
-            @display("p=31,30;is=satellite");
-            mobility.typename = "CircleMobility";  // Satellites move in orbit
-            mobility.speed = uniform(7500 kmps, 7800 kmps); // Speed varies slightly
-            //mobility.angle = uniform(0, 360); // Different orbits
-        }
-        satellite2: Satellite {
-            @display("p=149,100;is=satellite");
-            mobility.typename = "CircleMobility";  // Satellites move in orbit
-            mobility.speed = uniform(7500 kmps, 7800 kmps); // Speed varies slightly
-        }
-        groundStation: GroundStation {
-            @display("p=31,143;is=groundstation");
-        }
-       
-
-    connections allowunconnected:
-        //satellite1.pppg++ <--> PointToPointLink <--> satellite2.pppg++;
-            
-}
-
-
-channel PointToPointLink extends ned.DatarateChannel {
-    delay = 300ms; // Simulate satellite link delay
-    datarate = 10Mbps; // Bandwidth
-    ber = 1e-6; // Bit error rate
+        configurator : Ipv4NetworkConfigurator;
+        radioMedium : Ieee80211ScalarRadioMedium;
+        groundStation : GroundStation;
+        satellite[numSats] : Satellite;
+        attacker[numAttackers] : Attacker;
 }
