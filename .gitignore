@@ -1,3 +1,5 @@
 /.metadata/
 /inet/
+inet*
 Makefile*
+results*

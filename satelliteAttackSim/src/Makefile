@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for satelliteAttackSim
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -KINET_PROJ=../../inet -DINET_IMPORT -L$$\(INET_PROJ\)/src -lINET$$\(D\)
+#  opp_makemake -f --deep -KINET4_5_PROJ=../../inet4.5 -DINET_IMPORT -L$$\(INET4_5_PROJ\)/src -lINET$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -25,7 +25,7 @@ INCLUDE_PATH =
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = $(LDFLAG_LIBPATH)$(INET_PROJ)/src  -lINET$(D)
+LIBS = $(LDFLAG_LIBPATH)$(INET4_5_PROJ)/src  -lINET$(D)
 
 # Output directory
 PROJECT_OUTPUT_DIR = ../out
@@ -33,7 +33,7 @@ PROJECTRELATIVE_PATH = src
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS = $O/Satellite.o
+OBJS = $O/Attacker.o $O/GroundStation.o $O/Satellite.o
 
 # Message files
 MSGFILES =
@@ -42,7 +42,7 @@ MSGFILES =
 SMFILES =
 
 # Other makefile variables (-K)
-INET_PROJ=../../inet
+INET4_5_PROJ=../../inet4.5
 
 #------------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ include $(CONFIGFILE)
 # Simulation kernel and user interface libraries
 OMNETPP_LIBS = $(OPPMAIN_LIB) $(USERIF_LIBS) $(KERNEL_LIBS) $(SYS_LIBS)
 ifneq ($(PLATFORM),win32)
-LIBS += -Wl,-rpath,$(abspath $(INET_PROJ)/src)
+LIBS += -Wl,-rpath,$(abspath $(INET4_5_PROJ)/src)
 endif
 
 COPTS = $(CFLAGS) $(IMPORT_DEFINES) -DINET_IMPORT $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)

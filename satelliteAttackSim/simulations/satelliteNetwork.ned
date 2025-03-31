@@ -19,6 +19,7 @@ import satelliteattacksim.Attacker;
 import satelliteattacksim.GroundStation;
 import inet.physicallayer.wireless.common.medium.RadioMedium;
 import inet.node.inet.WirelessHost;
+import inet.node.wireless.AccessPoint;
 import inet.mobility.static.StaticLinearMobility;
 import inet.mobility.single.CircleMobility;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
@@ -26,6 +27,7 @@ import inet.physicallayer.wireless.common.medium.RadioMedium;
 import inet.physicallayer.wireless.apsk.packetlevel.ApskScalarRadioMedium;
 import inet.physicallayer.wireless.ieee80211.packetlevel.Ieee80211ScalarRadioMedium;
 import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
+import inet.linklayer.ieee80211.mgmt.Ieee80211AgentSta;
 
 network SatelliteNetwork
 {
@@ -43,4 +45,5 @@ network SatelliteNetwork
         groundStation : GroundStation;
         satellite[numSats] : Satellite;
         attacker[numAttackers] : Attacker;
+        //accessPoint : AccessPoint;
 }
