@@ -24,7 +24,9 @@ By clicking on the drop-down menu titled **Config name**, you can choose the wan
 - DDoS_High_Traffic - A DDoS attack where the attack nodes send DoS traffic every 5 ms.
 - Scenario_Malware_Injection - An attack where the attack node sends an abnormally large message towards one of the satellites in the network, through the ground station.
 
-When the DDoS scenarios are selected in the drop-down menu mentioned above, the environment will ask for the number of attacker nodes that is going to be used in the attack. ![image](https://github.com/user-attachments/assets/737fbd28-b1a6-4282-be34-5db96d8b2403)
+When the DDoS scenarios are selected in the drop-down menu mentioned above, the environment will ask for the number of attacker nodes that is going to be used in the attack. 
+
+![image](https://github.com/user-attachments/assets/737fbd28-b1a6-4282-be34-5db96d8b2403)
 
 When the number of attacker nodes are filled in, the number of satellites will be asked for. The Malware Injection scenario will not ask for the number of attacker nodes, only the number of satellites. When this number is input, the simulation will be ready to be run. Click the green **play** button in the upper left to start the simulation.
 
