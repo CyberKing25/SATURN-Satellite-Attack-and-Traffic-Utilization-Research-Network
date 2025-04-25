@@ -16,8 +16,7 @@
 package satelliteattacksim;
 import inet.node.inet.WirelessHost;
 
-module GroundStation_OSDLP extends WirelessHost
-{
+module GroundStation_OSDLP extends WirelessHost {
     parameters:
         int scid = 0;
     gates:

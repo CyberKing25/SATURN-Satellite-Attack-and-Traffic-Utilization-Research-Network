@@ -29,13 +29,13 @@ import inet.physicallayer.wireless.ieee80211.packetlevel.Ieee80211ScalarRadioMed
 import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
 import inet.linklayer.ieee80211.mgmt.Ieee80211AgentSta;
 
-network OSDLPNet
-{
-       parameters:
+network OSDLPNet {
+    parameters:
         int numAttackers;
         int numSats;
-        @figure[rcvdPkText](type=indicatorText; pos=380,20; anchor=w; font=,18; textFormat="packets received: %g"; initialValue=0);
-        @statistic[packetReceived](source=groundStation.app[0].packetReceived; record=figure(count); targetFigure=rcvdPkText);
+        //@figure[rcvdPkText](type=indicatorText; pos=380,20; anchor=w; font=,18; textFormat="packets received: %g"; initialValue=0);
+        //@statistic[packetReceived](source=groundStation.app[0].packetReceived; record=figure(count); targetFigure=rcvdPkText);
+        
     submodules:
         visualizer: IntegratedCanvasVisualizer {
             @display("p=580,125");
@@ -48,4 +48,11 @@ network OSDLPNet
                 scid = index + 1;
         };
         attacker[numAttackers] : Attacker;
+        
+    connections allowunconnected:
+        groundStation.out --> satellite[0].in;
+        for i = 0..numSats-2 {
+            satellite[i].out --> satellite[i+1].in;
+        }
+        satellite[numSats-1].out --> groundStation.in;
 }

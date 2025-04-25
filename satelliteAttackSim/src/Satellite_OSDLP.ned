@@ -17,11 +17,9 @@ package satelliteattacksim;
 import inet.node.inet.WirelessHost;
 import inet.mobility.single.CircleMobility;
 
-module Satellite_OSDLP extends WirelessHost
-{
-        parameters:
+module Satellite_OSDLP extends WirelessHost{
+    parameters:
         int scid;
-        @class(Satellite);
         @display("i=device/satellite;");
         string nodeType = default("Satellite");
     	string orbitNormal = default(""); 

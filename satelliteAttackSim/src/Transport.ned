@@ -18,10 +18,10 @@ package satelliteattacksim;
 //
 // TODO auto-generated module
 //
-simple Transport
-{
-         parameters:
-         @class(Transport);
+simple Transport {
+    parameters:
+        @class(Transport);
+        volatile double sendRate @unit(s) = 0.7s; 
         int scid = parent.scid;
         int vcid; // Virtual Channel ID
         int max_fdu_len; // Maximum FDU length

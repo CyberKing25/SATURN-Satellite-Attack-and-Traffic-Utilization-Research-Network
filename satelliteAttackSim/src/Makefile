@@ -33,8 +33,7 @@ PROJECTRELATIVE_PATH = src
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS = $O/Satellite.o \
-    $O/Transport.o \
+OBJS = $O/Transport.o \
     $O/packets/TCPacket_m.o \
     $O/osdlp/osdlp_clcw.o \
     $O/osdlp/osdlp_cop.o \
