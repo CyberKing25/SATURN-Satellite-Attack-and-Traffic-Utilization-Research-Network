@@ -18,24 +18,25 @@
 
 #include <omnetpp.h>
 #include "./packets/TCPacket_m.h"
-#include "packets/TMPacket_m.h"
 
 using namespace omnetpp;
 
 /**
  * TODO - Generated class
  */
-class Transport : public cSimpleModule
-{
-protected:
-  virtual void initialize() override;
-  virtual void handleMessage(cMessage *msg) override;
+class Transport : public cSimpleModule {
+    private:
+        double sendRate;
 
-  void initializeTC_Packet();
-  void initTC(TC_Packet *TC, bool encapsulate);
-  void initializeTransferFrame_TC(struct tc_transfer_frame *tc_tf, TC_Packet *TC);
-  uint8_t* EncapsulateTC(struct tc_transfer_frame *tc_tf, uint8_t *data, uint16_t length);
-  void DecapsulateTC(TC_Packet *TC);
+    protected:
+      virtual void initialize() override;
+      virtual void handleMessage(cMessage *msg) override;
+
+      void initializeTC_Packet();
+      void initTC(TC_Packet *TC, bool encapsulate);
+      void initializeTransferFrame_TC(struct tc_transfer_frame *tc_tf, TC_Packet *TC);
+      uint8_t* EncapsulateTC(struct tc_transfer_frame *tc_tf, uint8_t *data, uint16_t length);
+      void DecapsulateTC(TC_Packet *TC);
 };
 
 #endif

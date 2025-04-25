@@ -25,7 +25,7 @@ Define_Module(Transport);
 void Transport::initialize()
 {
     sendRate = par("sendRate").doubleValue();
-    cMessage start = new cMessage("Start");
+    cMessage *start = new cMessage("Start");
     scheduleAt(sendRate, start);
 }
 
@@ -34,7 +34,7 @@ void Transport::handleMessage(cMessage *msg)
     if(msg->isSelfMessage()){
         initializeTC_Packet();
         simtime_t t = sendRate + simTime();
-        scheduleAt(t, "send");
+        scheduleAt(t, new cMessage("Start"));
     }
     else {
         TC_Packet *tcPacket = check_and_cast<TC_Packet*>(msg);
@@ -95,12 +95,6 @@ void Transport::initializeTransferFrame_TC(struct tc_transfer_frame *tc_tf, TC_P
 
     EV << "TC-Packet for satellite " << TC->getScid() << " prepared for transmission.\n";
 }
-
-
-void Transport::initializeTM_Packet(){
-
-}
-
 
 
 uint8_t* Transport::EncapsulateTC(struct tc_transfer_frame *tc_tf, uint8_t *data, uint16_t length){
