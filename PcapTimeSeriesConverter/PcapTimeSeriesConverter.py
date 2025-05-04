@@ -20,7 +20,7 @@ class PCAPAnalyzerApp:
         self.root.configure(bg=self.bg_color)
         self.energy_df = None
         self.packet_df = None
-
+        
         self.selected_features = {
             'Timestamp': tk.BooleanVar(value=True),
             'Packet Size': tk.BooleanVar(value=True),
@@ -31,7 +31,7 @@ class PCAPAnalyzerApp:
         }
         self.title_label = tk.Label(
             root,
-            text="Pcaps2Series",
+            text="PcapTimeSeriesConverter",
             font=("Arial", 24, "bold"),
             fg="#39FF14",
             bg=self.bg_color
@@ -71,11 +71,6 @@ class PCAPAnalyzerApp:
         self.select_button = tk.Button(root, text="Select PCAP File",  bg=self.accent_color, fg=self.fg_color, activebackground=self.fg_color, activeforeground=self.bg_color, command=self.load_pcap, font=("Arial", 12))
         self.select_button.pack(pady=10)
 
-        self.label = tk.Label(root, text="Choose an Excel file with Energy Consumption", bg=self.bg_color, fg=self.fg_color, font=("Arial", 14))
-        self.label.pack(pady=10)
-
-        self.select_energy_button = tk.Button(root, text="Select Energy Consumption File",  bg=self.accent_color, fg=self.fg_color, activebackground=self.fg_color, activeforeground=self.bg_color, command=self.load_excel, font=("Arial", 12))
-        self.select_energy_button.pack(pady=10)
 
         self.save_button = tk.Button(root, text="Save Extracted Data to CSV",  bg=self.accent_color, fg=self.fg_color, activebackground=self.fg_color, activeforeground=self.bg_color, command=self.save_csv, font=("Arial", 12), state=tk.DISABLED)
         self.save_button.pack(pady=10)
