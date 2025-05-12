@@ -1,6 +1,6 @@
 # A simulation module for simulating cyberattacks towards LEO satellite constellations
 
-[NAME_OF_TOOL] is a low earth orbit (LEO) satellite network cyberattack simulation framework. It works as a module for OMNeT++, and provides two simulation scenarios based on the cyberattacks, Distributed-Denial-of-Service (DDoS) and Malware injection. The framework was developed for OMNeT++ 6.1 and INET version 4.5.
+SATURN (Satellite Attack and Traffic Utilization Research Network) is a low earth orbit (LEO) satellite network cyberattack simulation framework. It works as a module for OMNeT++, and provides two simulation scenarios based on the cyberattacks, Distributed-Denial-of-Service (DDoS) and Malware injection. The framework was developed for OMNeT++ 6.1 and INET version 4.5.
 
 ## Installation
 
