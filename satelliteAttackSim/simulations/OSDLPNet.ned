@@ -46,6 +46,7 @@ network OSDLPNet {
         satellite[numSats] : Satellite_OSDLP {
             parameters:
                 scid = index + 1;
+                startDegree = index * 10 deg;
         };
         attacker[numAttackers] : Attacker;
         

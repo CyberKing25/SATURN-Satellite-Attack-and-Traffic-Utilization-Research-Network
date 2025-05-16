@@ -121,6 +121,7 @@ inline void doParsimPacking(omnetpp::cCommBuffer *b, const TC_Packet& obj) {obj.
 inline void doParsimUnpacking(omnetpp::cCommBuffer *b, TC_Packet& obj) {obj.parsimUnpack(b);}
 
 
+
 namespace omnetpp {
 
 template<> inline TC_Packet *fromAnyPtr(any_ptr ptr) { return check_and_cast<TC_Packet*>(ptr.get<cObject>()); }

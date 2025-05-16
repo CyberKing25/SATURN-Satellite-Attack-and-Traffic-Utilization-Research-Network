@@ -43,7 +43,11 @@ network SatelliteNetwork
         configurator : Ipv4NetworkConfigurator;
         radioMedium : Ieee80211ScalarRadioMedium;
         groundStation : GroundStation;
-        satellite[numSats] : Satellite;
+        satellite[numSats] : Satellite {
+        	parameters:
+        	    startDegree = index * 10 deg;
+        };
+        	
         attacker[numAttackers] : Attacker;
         //accessPoint : AccessPoint;
 }
