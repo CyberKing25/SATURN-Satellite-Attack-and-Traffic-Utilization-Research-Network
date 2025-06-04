@@ -11,7 +11,7 @@ class PCAPAnalyzerApp:
     def __init__(self, root):
         self.root = root
         self.root.title("PCAP Time Series Analyzer")
-        self.root.geometry("1080x920")
+        self.root.geometry("1080x1020")
         # Dark mode colors
         self.bg_color = "#2e2e2e"
         self.fg_color = "#ffffff"
@@ -78,10 +78,23 @@ class PCAPAnalyzerApp:
 
         self.canvas = None  # For matplotlib
 
+        self.loading_label = tk.Label(
+            self.root,
+            text="",
+            font=("Arial", 14),
+            fg="#39FF14",
+            bg=self.bg_color
+        )
+        self.loading_label.pack(pady=10)
+
     def load_pcap(self):
         file_path = filedialog.askopenfilename(title="Select a PCAP file", filetypes=[("PCAP files", "*.pcap *.pcapng")])
         if not file_path:
             return
+        
+            # Show loading message
+        self.loading_label.config(text="Loading time series graph...")
+        self.root.update_idletasks()  # Ensure the label appears immediately
 
         try:
             packets = rdpcap(file_path)
@@ -150,6 +163,9 @@ class PCAPAnalyzerApp:
 
         except Exception as e:
             messagebox.showerror("Error", f"Failed to process PCAP file:\n{e}")
+        
+            # Hide loading message
+        self.loading_label.config(text="")
 
     def load_excel(self):
         file_path = filedialog.askopenfilename(title="Select an Excel file", filetypes=[("Excel files", "*.xlsx *.xls")])
@@ -198,10 +214,22 @@ class PCAPAnalyzerApp:
             self.canvas.get_tk_widget().destroy()
 
         fig, ax = plt.subplots(figsize=(6, 4))
-        series.plot(ax=ax)
+        series.plot(ax=ax, color='blue', label="Packets per Second")
+
+        # === Highlight anomaly background ===
+        if self.packet_df is not None and 'Traffic Type' in self.packet_df.columns:
+            # Get seconds of anomaly packets
+            anomalies = self.packet_df[self.packet_df["Traffic Type"].str.lower() == "anomaly"]
+            if not anomalies.empty:
+                anomaly_start = int(anomalies["Seconds"].min()) -1
+                anomaly_end = int(anomalies["Seconds"].max()) + 1  # +1 to make it inclusive
+                ax.axvspan(anomaly_start, anomaly_end, color='red', alpha=0.3, label=f"Anomalous Traffic")
+
         ax.set_title("Packets per Second")
         ax.set_xlabel("Seconds since start (s)")
         ax.set_ylabel("Packet Count")
+        ax.legend()
+        ax.grid(True)
 
         self.canvas = FigureCanvasTkAgg(fig, master=self.root)
         self.canvas.draw()
